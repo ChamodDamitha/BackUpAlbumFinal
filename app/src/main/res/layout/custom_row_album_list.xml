@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="horizontal" android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+
+    <ImageView
+        android:layout_width="100dp"
+        android:layout_height="80dp"
+        android:id="@+id/imageView"
+        android:src="@drawable/folder_icon2" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="80dp"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:text="Large Text"
+        android:id="@+id/txtAlbumNameInList"
+        android:gravity="left|center"
+        android:layout_marginLeft="10dp"
+        android:layout_toLeftOf="@+id/btnDelAlbum"
+        android:layout_weight="0.86" />
+
+    <Button
+        style="?android:attr/buttonStyleSmall"
+        android:layout_width="wrap_content"
+        android:layout_height="60dp"
+        android:text="-"
+        android:id="@+id/btnDelAlbum"
+        android:textSize="30dp"
+        android:layout_alignParentRight="true"
+        android:onClick="deleteAlbum"
+        />
+
+</LinearLayout>

@@ -1,0 +1,157 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools" android:layout_width="match_parent"
+    android:layout_height="match_parent" android:paddingLeft="@dimen/activity_horizontal_margin"
+    android:paddingRight="@dimen/activity_horizontal_margin"
+    android:paddingTop="@dimen/activity_vertical_margin"
+    android:paddingBottom="@dimen/activity_vertical_margin"
+    tools:context="com.example.chamod.backupalbumfinal.NewAccountActivity">
+
+
+    <TextView
+        android:layout_width="150dp"
+        android:layout_height="40dp"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:text="New Account"
+        android:id="@+id/textView0"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentStart="false"
+        android:layout_margin="10dp"
+        android:layout_centerHorizontal="true"
+        android:gravity="center"
+
+        />
+
+
+    <TextView
+        android:layout_width="150dp"
+        android:layout_height="40dp"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:text="Name"
+        android:id="@+id/nameTxtView"
+        android:layout_alignParentTop="false"
+        android:layout_alignParentStart="true"
+        android:layout_below="@+id/textView0"
+        android:layout_margin="10dp"
+        android:gravity="bottom"
+        />
+
+    <TextView
+        android:layout_width="150dp"
+        android:layout_height="40dp"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:text="Email"
+        android:id="@+id/emailTxtView"
+        android:layout_alignParentTop="false"
+        android:layout_alignParentStart="true"
+        android:layout_below="@+id/nameTxtView"
+        android:layout_margin="10dp"
+        android:gravity="bottom"
+        />
+
+    <TextView
+        android:layout_width="150dp"
+        android:layout_height="40dp"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:text="Username"
+        android:id="@+id/userNameTxtView"
+        android:layout_alignParentTop="false"
+        android:layout_alignParentStart="true"
+        android:layout_below="@+id/emailTxtView"
+        android:layout_margin="10dp"
+        android:gravity="bottom"
+        />
+
+    <TextView
+        android:layout_width="150dp"
+        android:layout_height="40dp"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:text="Password"
+        android:id="@+id/passwordTxtView"
+        android:layout_alignParentTop="false"
+        android:layout_alignParentStart="true"
+        android:layout_below="@+id/userNameTxtView"
+        android:layout_margin="10dp"
+        android:gravity="bottom"
+        />
+
+    <TextView
+        android:layout_width="150dp"
+        android:layout_height="40dp"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:text="Confirm Password"
+        android:id="@+id/conPasswrdTxtView"
+        android:layout_alignParentTop="false"
+        android:layout_alignParentStart="true"
+        android:layout_below="@+id/passwordTxtView"
+        android:layout_margin="10dp"
+        android:layout_marginBottom="40dp"
+        android:gravity="bottom"
+        />
+
+    <EditText
+        android:singleLine="true"
+        android:layout_width="150dp"
+        android:layout_height="40dp"
+        android:inputType="textPersonName"
+        android:text=""
+        android:ems="10"
+        android:id="@+id/nameTxt"
+        android:layout_alignTop="@+id/nameTxtView"
+        android:layout_toRightOf="@+id/nameTxtView"
+        android:layout_alignParentEnd="true" />
+
+    <EditText
+        android:singleLine="true"
+        android:layout_width="150dp"
+        android:layout_height="40dp"
+        android:inputType="textEmailAddress"
+        android:ems="10"
+        android:id="@+id/emailTxt"
+        android:layout_alignTop="@+id/emailTxtView"
+        android:layout_toRightOf="@+id/emailTxtView"
+        android:layout_alignParentEnd="true" />
+
+    <EditText
+        android:singleLine="true"
+        android:layout_width="150dp"
+        android:layout_height="40dp"
+        android:id="@+id/userNameTxt"
+        android:layout_alignTop="@+id/userNameTxtView"
+        android:layout_toRightOf="@+id/userNameTxtView"
+        android:layout_alignParentEnd="true" />
+
+    <EditText
+        android:layout_width="150dp"
+        android:layout_height="40dp"
+        android:inputType="textPassword"
+        android:ems="10"
+        android:id="@+id/passwordTxt"
+        android:layout_alignTop="@+id/passwordTxtView"
+        android:layout_toRightOf="@+id/passwordTxtView"
+        android:layout_alignParentEnd="true" />
+
+    <EditText
+        android:layout_width="150dp"
+        android:layout_height="40dp"
+        android:inputType="textPassword"
+        android:ems="10"
+        android:id="@+id/confrmPasswordTxt"
+        android:layout_alignTop="@+id/conPasswrdTxtView"
+        android:layout_toRightOf="@+id/conPasswrdTxtView"
+        android:layout_alignParentEnd="true" />
+
+    <Button
+        android:layout_width="150dp"
+        android:layout_height="50dp"
+        android:text="Create Account"
+        android:id="@+id/btnCreateAccount"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="10dp"
+        android:layout_marginTop="10dp"
+        />
+
+
+
+
+</RelativeLayout>
