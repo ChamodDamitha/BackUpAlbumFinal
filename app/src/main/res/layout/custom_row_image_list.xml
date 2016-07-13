@@ -23,10 +23,12 @@
         />
 <LinearLayout
     android:layout_width="match_parent"
-    android:layout_height="100dp">
+    android:layout_height="100dp"
+    android:weightSum="1"
+    android:id="@+id/btnTrayLayout">
     <Button
         style="?android:attr/buttonStyleSmall"
-        android:layout_width="wrap_content"
+        android:layout_width="80dp"
         android:layout_height="wrap_content"
         android:text="Edit"
         android:id="@+id/btnEditDesc"
@@ -35,15 +37,27 @@
         />
 
     <Button
-        style="?android:attr/buttonStyleSmall"
-        android:layout_width="46dp"
+        android:layout_width="80dp"
         android:layout_height="wrap_content"
-        android:text="-"
+        android:text="SAVE"
+        android:id="@+id/btnSaveImgDesc"
+        android:layout_toRightOf="@+id/btnEditDesc"
+        android:layout_weight="0.05"
+        android:enabled="false"
+        android:onClick="saveImgDesc"
+        />
+
+    <Button
+        style="?android:attr/buttonStyleSmall"
+        android:layout_width="80dp"
+        android:layout_height="wrap_content"
+        android:text="Delete"
         android:id="@+id/btnDelImg"
         android:layout_below="@+id/txtImageDesc"
-        android:layout_toRightOf="@+id/btnEditDesc"
-
+        android:layout_toRightOf="@+id/btnSaveImgDesc"
+        android:onClick="deleteImage"
         />
 
 </LinearLayout>
+
 </LinearLayout>

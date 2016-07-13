@@ -4,4 +4,10 @@
     tools:context="com.example.chamod.backupalbumfinal.OpenedAlbumActivity">
     <item android:id="@+id/action_settings" android:title="@string/action_settings"
         android:orderInCategory="100" app:showAsAction="never" />
+    <item
+        android:id="@+id/action_logOut"
+        android:title="Log Out"
+
+        />
+
 </menu>

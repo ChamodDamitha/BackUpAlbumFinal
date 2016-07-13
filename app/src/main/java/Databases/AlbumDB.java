@@ -92,6 +92,7 @@ public class AlbumDB extends SQLiteOpenHelper
     public void deleteAlbum(Album album) {
         SQLiteDatabase db=getWritableDatabase();
         db.delete(TABLE_ALBUMS,COLUMN_ID+" = "+album.getId(),null);
+        db.close();
     }
 }
 

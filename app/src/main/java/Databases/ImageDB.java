@@ -68,23 +68,42 @@ public class ImageDB extends SQLiteOpenHelper
         Image image;
         SQLiteDatabase db=getWritableDatabase();
         String query = "SELECT * FROM " + TABLE_IMAGES + " WHERE " + COLUMN_ALBUM_ID + "=" + album.getId() + " ;";
+        try {
+            Cursor c = db.rawQuery(query, null);
+            c.moveToFirst();
+            while (!c.isAfterLast()) {
+                image = new Image();
+                image.setId(c.getInt(c.getColumnIndex(COLUMN_ID)));
+                image.setDescription(c.getString(c.getColumnIndex(COLUMN_DESC)));
+                image.setModifiedDate(c.getString(c.getColumnIndex(COLUMN_DATE_MODIFIED)));
+                image.setBacked(false);
+                images.add(image);
 
-        Cursor c = db.rawQuery(query, null);
-        c.moveToFirst();
-        while (!c.isAfterLast()) {
-            image=new Image();
-            image.setId(c.getInt(c.getColumnIndex(COLUMN_ID)));
-            image.setDescription(c.getString(c.getColumnIndex(COLUMN_DESC)));
-            image.setModifiedDate(c.getString(c.getColumnIndex(COLUMN_DATE_MODIFIED)));
-            image.setBacked(false);
-            images.add(image);
-
-            c.moveToNext();
+                c.moveToNext();
+            }
         }
-
+        catch (android.database.sqlite.SQLiteException e)
+        {
+            onCreate(db);
+        }
         return images;
-
-
     }
 
+    public void deleteImage(Image image)
+    {
+        SQLiteDatabase db=getWritableDatabase();
+        db.delete(TABLE_IMAGES,COLUMN_ID+" = "+image.getId(),null);
+        db.close();
+    }
+
+    public void updateImageDetails(Image image)
+    {
+        ContentValues values=new ContentValues();
+        values.put(COLUMN_DESC,image.getDescription());
+        values.put(COLUMN_DATE_MODIFIED,image.getModifiedDate());
+
+        SQLiteDatabase db=getWritableDatabase();
+        db.update(TABLE_IMAGES,values,COLUMN_ID+" = "+image.getId(),null);
+        db.close();
+    }
 }

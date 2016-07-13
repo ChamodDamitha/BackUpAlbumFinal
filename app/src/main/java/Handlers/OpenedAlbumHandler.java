@@ -75,12 +75,22 @@ public class OpenedAlbumHandler
 
     public void deleteImage(int position)
     {
-        //dkgnldl
+        Image image=images.get(position);
+        imageDB.deleteImage(image);
+        images.remove(image);
     }
 
     public ArrayList<Image> getImagesOfAlbum(Album album)
     {
         setImages(imageDB.getImagesOfAlbum(album));
         return getImages();
+    }
+
+    public void updateImageDesc(int position,String desc)
+    {
+        Image image=images.get(position);
+        image.setDescription(desc);
+        image.setModifiedDate(Utility.getCurrentDate());
+        imageDB.updateImageDetails(image);
     }
 }
