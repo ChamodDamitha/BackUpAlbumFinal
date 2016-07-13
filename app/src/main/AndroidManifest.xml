@@ -28,6 +28,10 @@
             android:name=".LoggedAccountActivity"
             android:label="@string/title_activity_logged_account" >
         </activity>
+        <activity
+            android:name=".OpenedAlbumActivity"
+            android:label="@string/title_activity_opened_album" >
+        </activity>
     </application>
 
 </manifest>

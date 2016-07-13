@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:weightSum="1">
+
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/imageViewAlbumImage"
+        android:layout_weight="0.68"
+        android:src="@drawable/test_image"
+        android:layout_gravity="fill"
+
+        />
+
+    <EditText
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/txtImageDesc"
+        android:layout_weight="0.04"
+        android:layout_below="@+id/imageViewAlbumImage"
+        />
+<LinearLayout
+    android:layout_width="match_parent"
+    android:layout_height="100dp">
+    <Button
+        style="?android:attr/buttonStyleSmall"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Edit"
+        android:id="@+id/btnEditDesc"
+        android:layout_below="@+id/txtImageDesc"
+
+        />
+
+    <Button
+        style="?android:attr/buttonStyleSmall"
+        android:layout_width="46dp"
+        android:layout_height="wrap_content"
+        android:text="-"
+        android:id="@+id/btnDelImg"
+        android:layout_below="@+id/txtImageDesc"
+        android:layout_toRightOf="@+id/btnEditDesc"
+
+        />
+
+</LinearLayout>
+</LinearLayout>
