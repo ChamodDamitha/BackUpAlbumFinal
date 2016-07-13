@@ -9,13 +9,14 @@
 
     <TextView
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_height="50dp"
         android:textAppearance="?android:attr/textAppearanceLarge"
         android:text="Album : "
         android:id="@+id/txtAlbumName"
         android:layout_alignParentTop="true"
         android:layout_alignParentStart="true"
-        android:layout_alignParentEnd="true" />
+        android:gravity="left|center"
+        android:layout_toStartOf="@+id/btnAddImg" />
 
     <ListView
         android:layout_width="wrap_content"
@@ -24,4 +25,17 @@
         android:layout_below="@+id/txtAlbumName"
         android:layout_alignParentStart="true"
         android:choiceMode="multipleChoice" />
+
+    <Button
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:text="+"
+        android:id="@+id/btnAddImg"
+        android:layout_alignBottom="@+id/txtAlbumName"
+        android:layout_alignEnd="@+id/listViewImages"
+        android:layout_alignParentTop="true"
+        android:onClick="addImage"
+        />
+
+
 </RelativeLayout>

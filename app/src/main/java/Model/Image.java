@@ -5,27 +5,20 @@ package Model;
  */
 public class Image
 {
-    private String name;
-    private String type;
+    private int id;
     private String description;
     private String destination;
     private boolean backed=false;
+    private String modifiedDate;
 
-    public String getName() {
-        return name;
+    public int getId() {
+        return id;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public void setId(int id) {
+        this.id = id;
     }
 
-    public String getType() {
-        return type;
-    }
-
-    public void setType(String type) {
-        this.type = type;
-    }
 
     public String getDescription() {
         return description;
@@ -49,6 +42,14 @@ public class Image
 
     public void setBacked(boolean backed) {
         this.backed = backed;
+    }
+
+    public String getModifiedDate() {
+        return modifiedDate;
+    }
+
+    public void setModifiedDate(String modifiedDate) {
+        this.modifiedDate = modifiedDate;
     }
 
     public void loadImage()

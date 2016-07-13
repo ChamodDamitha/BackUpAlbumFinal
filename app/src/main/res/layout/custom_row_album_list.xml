@@ -19,7 +19,9 @@
         android:gravity="left|center"
         android:layout_marginLeft="10dp"
         android:layout_toLeftOf="@+id/btnDelAlbum"
-        android:layout_weight="0.86" />
+        android:layout_weight="0.86"
+        android:onClick="gotoAlbum"
+        />
 
     <Button
         style="?android:attr/buttonStyleSmall"

@@ -15,6 +15,7 @@ import java.util.ArrayList;
 
 import Handlers.AccountHandler;
 import Handlers.AlbumHandler;
+import Handlers.OpenedAlbumHandler;
 import Model.Album;
 
 
@@ -122,6 +123,15 @@ public class LoggedAccountActivity extends ActionBarActivity {
             }
         });
         builder.show();
+    }
+
+    public void gotoAlbum(View view)
+    {
+        final int position=listViewAlbums.getPositionForView((View)view.getParent());
+        OpenedAlbumHandler openedAlbumHandler=OpenedAlbumHandler.getInstance();
+        openedAlbumHandler.setOpenedAlbum(albumHandler.getAlbums().get(position));
+
+        startActivity(new Intent(this,OpenedAlbumActivity.class));
     }
 
     public void logOut()
