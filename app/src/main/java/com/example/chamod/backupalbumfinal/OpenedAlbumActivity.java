@@ -3,8 +3,11 @@ package com.example.chamod.backupalbumfinal;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
-import android.support.v7.app.ActionBarActivity;
+import android.graphics.Bitmap;
+import android.net.Uri;
 import android.os.Bundle;
+import android.support.v7.app.ActionBarActivity;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -20,13 +23,16 @@ import Handlers.OpenedAlbumHandler;
 import Model.Image;
 
 
-public class OpenedAlbumActivity extends ActionBarActivity {
+public class OpenedAlbumActivity extends ActionBarActivity implements SelectImageFragment.ISelectImage{
 
     private OpenedAlbumHandler openedAlbumHandler;
     private ImageListAdapter imageListAdapter;
     private ListView listViewImages;
     private TextView txtAlbumName;
 
+    private Image[] imagesArray;
+
+    private View selectImageFragment;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -41,7 +47,9 @@ public class OpenedAlbumActivity extends ActionBarActivity {
 
         txtAlbumName=(TextView)findViewById(R.id.txtAlbumName);
         txtAlbumName.setText(openedAlbumHandler.getOpenedAlbum().getName());
-        txtAlbumName.setEnabled(false);
+
+        selectImageFragment=(View)findViewById(R.id.fragmentSelectImg);
+        selectImageFragment.setVisibility(View.INVISIBLE);
     }
 
 
@@ -67,10 +75,12 @@ public class OpenedAlbumActivity extends ActionBarActivity {
 
     private void setImageListView() {
         ArrayList<Image> images=openedAlbumHandler.getImagesOfAlbum(openedAlbumHandler.getOpenedAlbum());
-        Image[] imagesArray=new Image[images.size()];
+
+        imagesArray=new Image[images.size()];
         for(int i=0;i<imagesArray.length;i++)
         {
             imagesArray[i]=images.get(i);
+            Log.e("id:",String.valueOf(imagesArray[i].getId()));
         }
         imageListAdapter=new ImageListAdapter(this,imagesArray);
         listViewImages.setAdapter(imageListAdapter);
@@ -78,6 +88,7 @@ public class OpenedAlbumActivity extends ActionBarActivity {
 
     public void addImage(View view)
     {
+        /*
         AlertDialog.Builder builder=new AlertDialog.Builder(this);
         builder.setTitle("New Image");
         builder.setMessage("Enter Image Description");
@@ -91,7 +102,7 @@ public class OpenedAlbumActivity extends ActionBarActivity {
                         if(!imageDesc.equals("")) {
 
                                 ArrayList<Image> images=openedAlbumHandler.getImages();
-                                Image[]  imagesArray = new Image[images.size()+1];
+                                imagesArray = new Image[images.size()+1];
                                 for (int i = 0; i < images.size(); i++)
                                     imagesArray[i] = images.get(i);
                                 Image image=openedAlbumHandler.createImage(imageDesc);
@@ -106,7 +117,9 @@ public class OpenedAlbumActivity extends ActionBarActivity {
                     }
                 }
         );
-        builder.show();
+        builder.show();*/
+
+        selectImageFragment.setVisibility(View.VISIBLE);
     }
 
     public void deleteImage(View view)
@@ -162,5 +175,20 @@ public class OpenedAlbumActivity extends ActionBarActivity {
     {
         AccountHandler.getInstance().logOut();
         startActivity(new Intent(this, MainLogin.class));
+    }
+
+    @Override
+    public void addImage(Bitmap imageBitmap, Uri imageUri, String imageDesc) {
+        ArrayList<Image> images=openedAlbumHandler.getImages();
+        imagesArray = new Image[images.size()+1];
+        for (int i = 0; i < images.size(); i++)
+            imagesArray[i] = images.get(i);
+        Image image=openedAlbumHandler.createImage(imageDesc,imageUri);
+        imagesArray[imagesArray.length - 1] = image;
+        imageListAdapter = new ImageListAdapter(OpenedAlbumActivity.this, imagesArray);
+        listViewImages.setAdapter(imageListAdapter);
+
+
+        openedAlbumHandler.addImage(image);
     }
 }

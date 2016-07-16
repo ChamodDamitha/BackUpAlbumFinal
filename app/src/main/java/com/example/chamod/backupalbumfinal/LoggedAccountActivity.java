@@ -28,6 +28,8 @@ public class LoggedAccountActivity extends ActionBarActivity {
 
     private ListView listViewAlbums;
 
+    private Intent openedAlbumActivityIntent;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -131,7 +133,9 @@ public class LoggedAccountActivity extends ActionBarActivity {
         OpenedAlbumHandler openedAlbumHandler=OpenedAlbumHandler.getInstance();
         openedAlbumHandler.setOpenedAlbum(albumHandler.getAlbums().get(position));
 
-        startActivity(new Intent(this,OpenedAlbumActivity.class));
+        if(openedAlbumActivityIntent==null)
+            openedAlbumActivityIntent=new Intent(this,OpenedAlbumActivity.class);
+        startActivity(openedAlbumActivityIntent);
     }
 
     public void logOut()

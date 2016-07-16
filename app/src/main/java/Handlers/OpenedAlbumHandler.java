@@ -1,5 +1,7 @@
 package Handlers;
 
+import android.net.Uri;
+
 import com.example.chamod.backupalbumfinal.OpenedAlbumActivity;
 
 import java.util.ArrayList;
@@ -30,7 +32,7 @@ public class OpenedAlbumHandler
 
     public void setOpenedAlbumActivity(OpenedAlbumActivity openedAlbumActivity) {
         this.openedAlbumActivity = openedAlbumActivity;
-        imageDB=new ImageDB(openedAlbumActivity,null,null,1);
+        imageDB=ImageDB.getInstance(openedAlbumActivity);
     }
 
     private OpenedAlbumHandler()
@@ -64,12 +66,13 @@ public class OpenedAlbumHandler
 
     }
     //test
-    public Image createImage(String desc)
+    public Image createImage(String desc,Uri imageUri)
     {
         Image image=new Image();
         image.setDescription(desc);
         image.setModifiedDate(Utility.getCurrentDate());
         image.setId(imageDB.addImage(openedAlbum, image));
+        image.setUri(imageUri);
         return image;
     }
 

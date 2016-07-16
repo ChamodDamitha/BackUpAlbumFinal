@@ -8,5 +8,6 @@
     <string name="title_activity_new_account">NewAccountActivity</string>
     <string name="title_activity_logged_account">LoggedAccountActivity</string>
     <string name="title_activity_opened_album">OpenedAlbumActivity</string>
+    <string name="title_activity_add_image">AddImageActivity</string>
 
 </resources>

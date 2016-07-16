@@ -25,10 +25,17 @@ public class AccountDB extends SQLiteOpenHelper
     private static final String COLUMN_PASSWORD="password";
     private  static final String COLUMN_LOGGED="logged";
 
+    private static AccountDB accountDB;
+    public static AccountDB getInstance(Context context)
+    {
+        if(accountDB==null)
+            accountDB=new AccountDB(context,null,null,1);
+        return accountDB;
+    }
 
     MainLogin mainLogin;
 
-    public AccountDB(Context context, String name, SQLiteDatabase.CursorFactory factory, int version) {
+    private AccountDB(Context context, String name, SQLiteDatabase.CursorFactory factory, int version) {
         super(context, DATABASE_NAME, factory, DATABASE_VERSION);
     }
 

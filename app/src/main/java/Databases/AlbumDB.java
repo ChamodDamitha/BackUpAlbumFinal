@@ -25,8 +25,16 @@ public class AlbumDB extends SQLiteOpenHelper
     private static final String COLUMN_NO_OF_IMAGES="no_of_images";
     private static final String COLUMN_USER_ID="user_id";
 
+    private static AlbumDB albumDB;
+    public static AlbumDB getInstance(Context context)
+    {
+        if(albumDB==null)
+            albumDB=new AlbumDB(context,null,null,1);
+        return albumDB;
+    }
 
-    public AlbumDB(Context context, String name, SQLiteDatabase.CursorFactory factory, int version) {
+
+    private AlbumDB(Context context, String name, SQLiteDatabase.CursorFactory factory, int version) {
         super(context, DATABASE_NAME, factory, DATABASE_VERSION);
     }
 

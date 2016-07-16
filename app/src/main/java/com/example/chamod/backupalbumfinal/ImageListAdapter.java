@@ -1,5 +1,6 @@
 package com.example.chamod.backupalbumfinal;
 
+import android.app.Activity;
 import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -9,16 +10,21 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import java.io.FileNotFoundException;
+
 import Model.Image;
+import Support.Utility;
 
 /**
  * Created by Chamod on 7/13/2016.
  */
 public class ImageListAdapter extends ArrayAdapter<Image> {
 
+    private Activity activity;
 
     public ImageListAdapter(Context context, Image[] images) {
         super(context,R.layout.custom_row_image_list ,images);
+        activity=(Activity)context;
     }
 
     @Override
@@ -36,6 +42,11 @@ public class ImageListAdapter extends ArrayAdapter<Image> {
         txtImageDesc.setText(singleImage.getDescription());
         txtImageDesc.setEnabled(false);
         //setting manual image should be done
+        try {
+            imageViewAlbumImage.setImageBitmap(Utility.decodeBitmap(singleImage.getUri(),activity));
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        }
 
         btnEditImgDesc.setOnClickListener(new View.OnClickListener() {
             @Override

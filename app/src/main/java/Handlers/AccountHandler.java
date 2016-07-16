@@ -38,7 +38,7 @@ public class AccountHandler
     public void setMainLogin(MainLogin mainLogin) {
         this.mainLogin = mainLogin;
 
-        accountDB=new AccountDB(mainLogin,null,null,1);
+        accountDB=AccountDB.getInstance(mainLogin);
         accountDB.setMainLogin(mainLogin);
     }
 

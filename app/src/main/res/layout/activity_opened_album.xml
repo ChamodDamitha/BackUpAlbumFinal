@@ -37,5 +37,16 @@
         android:onClick="addImage"
         />
 
+    <fragment
+        android:layout_width="wrap_content"
+        android:layout_height="400dp"
+        android:name="com.example.chamod.backupalbumfinal.SelectImageFragment"
+        android:id="@+id/fragmentSelectImg"
+        tools:layout="@layout/fragment_add_image"
+        android:layout_alignTop="@+id/listViewImages"
+        android:layout_alignEnd="@+id/btnAddImg"
+
+        />
+
 
 </RelativeLayout>

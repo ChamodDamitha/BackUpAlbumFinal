@@ -29,7 +29,7 @@ public class AlbumHandler
 
     public void setLoggedAccountActivity(LoggedAccountActivity loggedAccountActivity) {
         this.loggedAccountActivity = loggedAccountActivity;
-        albumDB=new AlbumDB(loggedAccountActivity,null,null,1);
+        albumDB=AlbumDB.getInstance(loggedAccountActivity);
     }
 
     private AlbumHandler()

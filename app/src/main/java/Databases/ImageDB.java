@@ -5,6 +5,7 @@ import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
+import android.net.Uri;
 
 import java.util.ArrayList;
 
@@ -17,22 +18,31 @@ import Model.Image;
 public class ImageDB extends SQLiteOpenHelper
 {
     private static final int DATABASE_VERSION=1;
-    private static final String DATABASE_NAME="BackUpAlbum.db";
+    private static final String DATABASE_NAME="BackUpAlbum2.db";
     private static final String TABLE_IMAGES="images";
     private static final String COLUMN_ID="id";
     private static final String COLUMN_DESC="description";
     private static final String COLUMN_DATE_MODIFIED="modified_date";
+    private static final String COLUMN_URI="uri";
     private static final String COLUMN_BACKED="backed";
     private static final String COLUMN_ALBUM_ID="album_id";
 
-    public ImageDB(Context context, String name, SQLiteDatabase.CursorFactory factory, int version) {
+    private static ImageDB imageDB;
+    public static ImageDB getInstance(Context context)
+    {
+        if(imageDB==null)
+            imageDB=new ImageDB(context,null,null,1);
+        return imageDB;
+    }
+
+    private ImageDB(Context context, String name, SQLiteDatabase.CursorFactory factory, int version) {
         super(context, DATABASE_NAME, factory, DATABASE_VERSION);
     }
 
     @Override
     public void onCreate(SQLiteDatabase db) {
         String query="CREATE TABLE IF NOT EXISTS "+TABLE_IMAGES+"( "+COLUMN_ID+" INTEGER PRIMARY KEY AUTOINCREMENT,"
-                + COLUMN_DESC + " TEXT,"+ COLUMN_DATE_MODIFIED +" DATE," + COLUMN_BACKED+" TINYINT,"
+                + COLUMN_DESC + " TEXT,"+ COLUMN_DATE_MODIFIED +" DATE,"+COLUMN_URI+" TEXT," + COLUMN_BACKED+" TINYINT,"
                 + COLUMN_ALBUM_ID + " INTEGER );" ;
         db.execSQL(query);
     }
@@ -48,16 +58,19 @@ public class ImageDB extends SQLiteOpenHelper
         ContentValues values=new ContentValues();
         values.put(COLUMN_DESC,image.getDescription());
         values.put(COLUMN_DATE_MODIFIED,image.getModifiedDate());
+        values.put(COLUMN_URI,image.getUri().toString());
         values.put(COLUMN_BACKED,0);
         values.put(COLUMN_ALBUM_ID,album.getId());
 
         SQLiteDatabase db=getWritableDatabase();
-        db.insert(TABLE_IMAGES,null,values);
+        db.insert(TABLE_IMAGES, null, values);
+
 
         String query="SELECT MAX("+COLUMN_ID+") FROM "+TABLE_IMAGES+" ;";
         Cursor c=db.rawQuery(query,null);
         c.moveToFirst();
         int id=c.getInt(c.getColumnIndex("MAX("+COLUMN_ID+")"));
+
         db.close();
         return id;
     }
@@ -76,6 +89,7 @@ public class ImageDB extends SQLiteOpenHelper
                 image.setId(c.getInt(c.getColumnIndex(COLUMN_ID)));
                 image.setDescription(c.getString(c.getColumnIndex(COLUMN_DESC)));
                 image.setModifiedDate(c.getString(c.getColumnIndex(COLUMN_DATE_MODIFIED)));
+                image.setUri(Uri.parse(c.getString(c.getColumnIndex(COLUMN_URI))));
                 image.setBacked(false);
                 images.add(image);
 
