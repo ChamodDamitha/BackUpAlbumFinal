@@ -6,6 +6,7 @@ import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 import android.net.Uri;
+import android.widget.Toast;
 
 import java.util.ArrayList;
 
@@ -27,11 +28,14 @@ public class ImageDB extends SQLiteOpenHelper
     private static final String COLUMN_BACKED="backed";
     private static final String COLUMN_ALBUM_ID="album_id";
 
+    static Context context;
     private static ImageDB imageDB;
     public static ImageDB getInstance(Context context)
     {
-        if(imageDB==null)
-            imageDB=new ImageDB(context,null,null,1);
+        if(imageDB==null) {
+            imageDB = new ImageDB(context, null, null, 1);
+            ImageDB.context=context;
+        }
         return imageDB;
     }
 
@@ -42,7 +46,7 @@ public class ImageDB extends SQLiteOpenHelper
     @Override
     public void onCreate(SQLiteDatabase db) {
         String query="CREATE TABLE IF NOT EXISTS "+TABLE_IMAGES+"( "+COLUMN_ID+" INTEGER PRIMARY KEY AUTOINCREMENT,"
-                + COLUMN_DESC + " TEXT,"+ COLUMN_DATE_MODIFIED +" DATE,"+COLUMN_URI+" TEXT," + COLUMN_BACKED+" TINYINT,"
+                + COLUMN_DESC + " TEXT,"+ COLUMN_DATE_MODIFIED +" DATE,"+COLUMN_URI+" TEXT UNIQUE," + COLUMN_BACKED+" TINYINT,"
                 + COLUMN_ALBUM_ID + " INTEGER );" ;
         db.execSQL(query);
     }
@@ -63,6 +67,7 @@ public class ImageDB extends SQLiteOpenHelper
         values.put(COLUMN_ALBUM_ID,album.getId());
 
         SQLiteDatabase db=getWritableDatabase();
+
         db.insert(TABLE_IMAGES, null, values);
 
 
@@ -70,6 +75,14 @@ public class ImageDB extends SQLiteOpenHelper
         Cursor c=db.rawQuery(query,null);
         c.moveToFirst();
         int id=c.getInt(c.getColumnIndex("MAX("+COLUMN_ID+")"));
+
+        /////to be removed
+        query="SELECT * FROM "+TABLE_IMAGES+" WHERE "+COLUMN_ID+"="+id+" ;";
+        c=db.rawQuery(query,null);
+        c.moveToFirst();
+
+        Toast.makeText(context,"id="+String.valueOf(id)+" album id="+c.getString(c.getColumnIndex(COLUMN_ALBUM_ID)),Toast.LENGTH_LONG).show();
+        ////
 
         db.close();
         return id;
@@ -81,7 +94,8 @@ public class ImageDB extends SQLiteOpenHelper
         Image image;
         SQLiteDatabase db=getWritableDatabase();
         String query = "SELECT * FROM " + TABLE_IMAGES + " WHERE " + COLUMN_ALBUM_ID + "=" + album.getId() + " ;";
-        try {
+
+
             Cursor c = db.rawQuery(query, null);
             c.moveToFirst();
             while (!c.isAfterLast()) {
@@ -95,11 +109,7 @@ public class ImageDB extends SQLiteOpenHelper
 
                 c.moveToNext();
             }
-        }
-        catch (android.database.sqlite.SQLiteException e)
-        {
-            onCreate(db);
-        }
+
         return images;
     }
 

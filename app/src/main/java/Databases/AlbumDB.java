@@ -16,6 +16,7 @@ import Model.User;
  */
 public class AlbumDB extends SQLiteOpenHelper
 {
+    Context context;
     private static final int DATABASE_VERSION=1;
     private static final String DATABASE_NAME="BackUpAlbum.db";
     private static final String TABLE_ALBUMS="albums";
@@ -36,6 +37,7 @@ public class AlbumDB extends SQLiteOpenHelper
 
     private AlbumDB(Context context, String name, SQLiteDatabase.CursorFactory factory, int version) {
         super(context, DATABASE_NAME, factory, DATABASE_VERSION);
+        this.context=context;
     }
 
     @Override

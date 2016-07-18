@@ -7,7 +7,6 @@ import android.graphics.Bitmap;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.v7.app.ActionBarActivity;
-import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -15,6 +14,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import java.util.ArrayList;
 
@@ -43,13 +43,15 @@ public class OpenedAlbumActivity extends ActionBarActivity implements SelectImag
 
         listViewImages=(ListView)findViewById(R.id.listViewImages);
 
-        setImageListView();
+
 
         txtAlbumName=(TextView)findViewById(R.id.txtAlbumName);
         txtAlbumName.setText(openedAlbumHandler.getOpenedAlbum().getName());
 
         selectImageFragment=(View)findViewById(R.id.fragmentSelectImg);
         selectImageFragment.setVisibility(View.INVISIBLE);
+
+        setImageListView();
     }
 
 
@@ -80,9 +82,8 @@ public class OpenedAlbumActivity extends ActionBarActivity implements SelectImag
         for(int i=0;i<imagesArray.length;i++)
         {
             imagesArray[i]=images.get(i);
-            Log.e("id:",String.valueOf(imagesArray[i].getId()));
         }
-        imageListAdapter=new ImageListAdapter(this,imagesArray);
+        imageListAdapter=new ImageListAdapter(OpenedAlbumActivity.this,imagesArray);
         listViewImages.setAdapter(imageListAdapter);
     }
 
@@ -188,6 +189,7 @@ public class OpenedAlbumActivity extends ActionBarActivity implements SelectImag
         imageListAdapter = new ImageListAdapter(OpenedAlbumActivity.this, imagesArray);
         listViewImages.setAdapter(imageListAdapter);
 
+        Toast.makeText(this, image.getUri().toString(), Toast.LENGTH_LONG);
 
         openedAlbumHandler.addImage(image);
     }

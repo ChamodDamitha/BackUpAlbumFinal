@@ -71,8 +71,8 @@ public class OpenedAlbumHandler
         Image image=new Image();
         image.setDescription(desc);
         image.setModifiedDate(Utility.getCurrentDate());
-        image.setId(imageDB.addImage(openedAlbum, image));
         image.setUri(imageUri);
+        image.setId(imageDB.addImage(openedAlbum, image));
         return image;
     }
 

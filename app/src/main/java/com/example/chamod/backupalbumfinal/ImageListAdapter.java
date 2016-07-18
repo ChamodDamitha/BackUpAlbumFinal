@@ -9,8 +9,7 @@ import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
-
-import java.io.FileNotFoundException;
+import android.widget.Toast;
 
 import Model.Image;
 import Support.Utility;
@@ -43,9 +42,9 @@ public class ImageListAdapter extends ArrayAdapter<Image> {
         txtImageDesc.setEnabled(false);
         //setting manual image should be done
         try {
-            imageViewAlbumImage.setImageBitmap(Utility.decodeBitmap(singleImage.getUri(),activity));
-        } catch (FileNotFoundException e) {
-            e.printStackTrace();
+            imageViewAlbumImage.setImageBitmap(Utility.decodeBitmap(singleImage.getUri(), activity));
+        } catch (Exception e) {
+            Toast.makeText(activity,"exception = "+e.toString(),Toast.LENGTH_LONG).show();
         }
 
         btnEditImgDesc.setOnClickListener(new View.OnClickListener() {
