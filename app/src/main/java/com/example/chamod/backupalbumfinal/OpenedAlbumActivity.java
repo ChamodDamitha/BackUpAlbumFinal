@@ -12,11 +12,10 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
-
-import java.util.ArrayList;
 
 import Handlers.AccountHandler;
 import Handlers.OpenedAlbumHandler;
@@ -30,8 +29,6 @@ public class OpenedAlbumActivity extends ActionBarActivity implements SelectImag
     private ListView listViewImages;
     private TextView txtAlbumName;
 
-    private Image[] imagesArray;
-
     private View selectImageFragment;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -43,10 +40,8 @@ public class OpenedAlbumActivity extends ActionBarActivity implements SelectImag
 
         listViewImages=(ListView)findViewById(R.id.listViewImages);
 
-
-
         txtAlbumName=(TextView)findViewById(R.id.txtAlbumName);
-        txtAlbumName.setText(openedAlbumHandler.getOpenedAlbum().getName());
+        txtAlbumName.setText("Album : "+openedAlbumHandler.getOpenedAlbum().getName());
 
         selectImageFragment=(View)findViewById(R.id.fragmentSelectImg);
         selectImageFragment.setVisibility(View.INVISIBLE);
@@ -57,16 +52,12 @@ public class OpenedAlbumActivity extends ActionBarActivity implements SelectImag
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-        // Inflate the menu; this adds items to the action bar if it is present.
         getMenuInflater().inflate(R.menu.menu_opened_album, menu);
         return true;
     }
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        // Handle action bar item clicks here. The action bar will
-        // automatically handle clicks on the Home/Up button, so long
-        // as you specify a parent activity in AndroidManifest.xml.
         switch(item.getItemId()) {
             case R.id.action_logOut :
                 logOut();
@@ -76,53 +67,25 @@ public class OpenedAlbumActivity extends ActionBarActivity implements SelectImag
     }
 
     private void setImageListView() {
-        ArrayList<Image> images=openedAlbumHandler.getImagesOfAlbum(openedAlbumHandler.getOpenedAlbum());
-
-        imagesArray=new Image[images.size()];
-        for(int i=0;i<imagesArray.length;i++)
-        {
-            imagesArray[i]=images.get(i);
-        }
-        imageListAdapter=new ImageListAdapter(OpenedAlbumActivity.this,imagesArray);
+        imageListAdapter=new ImageListAdapter(OpenedAlbumActivity.this,openedAlbumHandler.getImagesOfAlbum(openedAlbumHandler.getOpenedAlbum()));
         listViewImages.setAdapter(imageListAdapter);
     }
 
-    public void addImage(View view)
+    //button click to add image
+    public void addNewImageButtonClick(View view)
     {
-        /*
-        AlertDialog.Builder builder=new AlertDialog.Builder(this);
-        builder.setTitle("New Image");
-        builder.setMessage("Enter Image Description");
-        final EditText txtImageDesc=new EditText(this);
-        builder.setView(txtImageDesc);
-        builder.setPositiveButton("OK",
-                new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialog, int which) {
-                        String imageDesc=txtImageDesc.getText().toString().trim();
-                        if(!imageDesc.equals("")) {
-
-                                ArrayList<Image> images=openedAlbumHandler.getImages();
-                                imagesArray = new Image[images.size()+1];
-                                for (int i = 0; i < images.size(); i++)
-                                    imagesArray[i] = images.get(i);
-                                Image image=openedAlbumHandler.createImage(imageDesc);
-                                imagesArray[imagesArray.length - 1] = image;
-                                imageListAdapter = new ImageListAdapter(OpenedAlbumActivity.this, imagesArray);
-                                listViewImages.setAdapter(imageListAdapter);
+        try {
+            selectImageFragment.setVisibility(View.VISIBLE);
 
 
-                                openedAlbumHandler.addImage(image);
-
-                        }
-                    }
-                }
-        );
-        builder.show();*/
-
-        selectImageFragment.setVisibility(View.VISIBLE);
+        }
+        catch (Exception e)
+        {
+            Toast.makeText(this,"error="+e.toString(),Toast.LENGTH_LONG).show();
+        }
     }
 
+    //button click to delete image
     public void deleteImage(View view)
     {
         final int position=listViewImages.getPositionForView((View)view.getParent());
@@ -134,18 +97,8 @@ public class OpenedAlbumActivity extends ActionBarActivity implements SelectImag
                 new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
-                        ArrayList<Image> images=openedAlbumHandler.getImages();
-                        Image[] imageArray=new Image[images.size()-1];
-                        for(int i=0;i<imageArray.length;i++)
-                        {
-                            if(i>=position) imageArray[i]=images.get(i+1);
-                            else imageArray[i]=images.get(i);
-                        }
-
-                        imageListAdapter=new ImageListAdapter(OpenedAlbumActivity.this,imageArray);
-                        listViewImages.setAdapter(imageListAdapter);
-
-                        openedAlbumHandler.deleteImage(position);
+                       openedAlbumHandler.deleteImage(position);
+                       imageListAdapter.notifyDataSetChanged();
                     }
                 }
         );
@@ -180,17 +133,8 @@ public class OpenedAlbumActivity extends ActionBarActivity implements SelectImag
 
     @Override
     public void addImage(Bitmap imageBitmap, Uri imageUri, String imageDesc) {
-        ArrayList<Image> images=openedAlbumHandler.getImages();
-        imagesArray = new Image[images.size()+1];
-        for (int i = 0; i < images.size(); i++)
-            imagesArray[i] = images.get(i);
         Image image=openedAlbumHandler.createImage(imageDesc,imageUri);
-        imagesArray[imagesArray.length - 1] = image;
-        imageListAdapter = new ImageListAdapter(OpenedAlbumActivity.this, imagesArray);
-        listViewImages.setAdapter(imageListAdapter);
-
-        Toast.makeText(this, image.getUri().toString(), Toast.LENGTH_LONG);
-
         openedAlbumHandler.addImage(image);
+        imageListAdapter.notifyDataSetChanged();
     }
 }

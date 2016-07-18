@@ -11,6 +11,8 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import java.util.ArrayList;
+
 import Model.Image;
 import Support.Utility;
 
@@ -21,7 +23,7 @@ public class ImageListAdapter extends ArrayAdapter<Image> {
 
     private Activity activity;
 
-    public ImageListAdapter(Context context, Image[] images) {
+    public ImageListAdapter(Context context, ArrayList<Image> images) {
         super(context,R.layout.custom_row_image_list ,images);
         activity=(Activity)context;
     }
@@ -31,12 +33,16 @@ public class ImageListAdapter extends ArrayAdapter<Image> {
         LayoutInflater inflater=LayoutInflater.from(getContext());
         final View customView=inflater.inflate(R.layout.custom_row_image_list,parent,false);
 
-        Image singleImage=getItem(position);
+        final Image singleImage=getItem(position);
 
         final TextView txtImageDesc=(TextView)customView.findViewById(R.id.txtImageDesc);
-        ImageView imageViewAlbumImage=(ImageView)customView.findViewById(R.id.imageViewAlbumImage);
+        final ImageView imageViewAlbumImage=(ImageView)customView.findViewById(R.id.imageViewAlbumImage);
         final Button btnEditImgDesc=(Button)customView.findViewById(R.id.btnEditDesc);
         final Button btnSaveImgDesc=(Button)customView.findViewById(R.id.btnSaveImgDesc);
+
+        final TextView txtImageDate=(TextView)customView.findViewById(R.id.txtImageDate);
+
+        txtImageDate.setText("Last Modified Date : "+singleImage.getModifiedDate());
 
         txtImageDesc.setText(singleImage.getDescription());
         txtImageDesc.setEnabled(false);
@@ -46,7 +52,6 @@ public class ImageListAdapter extends ArrayAdapter<Image> {
         } catch (Exception e) {
             Toast.makeText(activity,"exception = "+e.toString(),Toast.LENGTH_LONG).show();
         }
-
         btnEditImgDesc.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

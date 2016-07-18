@@ -2,30 +2,40 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:orientation="vertical" android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:weightSum="1">
+    android:background="#000042ff">
 
     <ImageView
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="300dp"
         android:id="@+id/imageViewAlbumImage"
-        android:layout_weight="0.68"
         android:src="@drawable/test_image"
         android:layout_gravity="fill"
 
+        android:adjustViewBounds="true"
+        android:background="#00bbbbbb" />
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="30dp"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:text="Date"
+        android:id="@+id/txtImageDate"
+        android:gravity="center"
+        android:layout_below= "@+id/imageViewAlbumImage"
+        android:layout_margin="5dp"
         />
 
     <EditText
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:id="@+id/txtImageDesc"
-        android:layout_weight="0.04"
-        android:layout_below="@+id/imageViewAlbumImage"
+        android:layout_below="@+id/txtImageDate"
         />
 <LinearLayout
     android:layout_width="match_parent"
-    android:layout_height="100dp"
-    android:weightSum="1"
+    android:layout_height="61dp"
     android:id="@+id/btnTrayLayout">
+    android:layout_below="@+id/txtImageDesc"
     <Button
         style="?android:attr/buttonStyleSmall"
         android:layout_width="80dp"
@@ -33,7 +43,8 @@
         android:text="Edit"
         android:id="@+id/btnEditDesc"
         android:layout_below="@+id/txtImageDesc"
-
+        android:layout_toLeftOf="@+id/btnSaveImgDesc"
+        android:layout_marginLeft="70dp"
         />
 
     <Button
@@ -41,10 +52,9 @@
         android:layout_height="wrap_content"
         android:text="SAVE"
         android:id="@+id/btnSaveImgDesc"
-        android:layout_toRightOf="@+id/btnEditDesc"
-        android:layout_weight="0.05"
         android:enabled="false"
         android:onClick="saveImgDesc"
+        android:layout_centerHorizontal="true"
         />
 
     <Button
@@ -53,7 +63,6 @@
         android:layout_height="wrap_content"
         android:text="Delete"
         android:id="@+id/btnDelImg"
-        android:layout_below="@+id/txtImageDesc"
         android:layout_toRightOf="@+id/btnSaveImgDesc"
         android:onClick="deleteImage"
         />

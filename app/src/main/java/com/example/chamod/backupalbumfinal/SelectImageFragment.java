@@ -63,11 +63,28 @@ public class SelectImageFragment extends Fragment {
         });
 
         txtDescFrgmnt=(EditText)view.findViewById(R.id.txtDescFrgmnt);
+        txtDescFrgmnt.setText(null);
+
+        final ImageView imageViewfrgmnt=(ImageView)view.findViewById(R.id.imageViewfrgmnt);
+        imageViewfrgmnt.setImageBitmap(null);
+
         Button btnOkFrgmnt=(Button)view.findViewById(R.id.btnOkFrgmnt);
         btnOkFrgmnt.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 passImageDetails();
+                imageViewfrgmnt.setImageDrawable(null);
+                txtDescFrgmnt.setText("");
+            }
+        });
+
+        Button btnCancelFragment=(Button)view.findViewById(R.id.btnCancelFragment);
+        btnCancelFragment.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                imageViewfrgmnt.setImageDrawable(null);
+                txtDescFrgmnt.setText("");
+                view.setVisibility(View.INVISIBLE);
             }
         });
 
@@ -80,6 +97,8 @@ public class SelectImageFragment extends Fragment {
         final int ACTIVITY_SELECT_IMAGE=1234;
         startActivityForResult(intent,ACTIVITY_SELECT_IMAGE);
     }
+
+
 
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {

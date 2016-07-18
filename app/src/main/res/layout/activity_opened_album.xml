@@ -34,19 +34,19 @@
         android:layout_alignBottom="@+id/txtAlbumName"
         android:layout_alignEnd="@+id/listViewImages"
         android:layout_alignParentTop="true"
-        android:onClick="addImage"
+        android:onClick="addNewImageButtonClick"
         />
 
     <fragment
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="400dp"
         android:name="com.example.chamod.backupalbumfinal.SelectImageFragment"
         android:id="@+id/fragmentSelectImg"
         tools:layout="@layout/fragment_add_image"
         android:layout_alignTop="@+id/listViewImages"
-        android:layout_alignEnd="@+id/btnAddImg"
 
-        />
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentBottom="true" />
 
 
 </RelativeLayout>

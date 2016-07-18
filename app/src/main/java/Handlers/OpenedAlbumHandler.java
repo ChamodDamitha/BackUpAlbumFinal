@@ -60,7 +60,6 @@ public class OpenedAlbumHandler
     public void addImage(Image image)
     {
         //take para and save to DB
-        //test
         images.add(image);
         imageDB.addImage(openedAlbum,image);
 

@@ -6,7 +6,6 @@ import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 import android.net.Uri;
-import android.widget.Toast;
 
 import java.util.ArrayList;
 
@@ -70,20 +69,10 @@ public class ImageDB extends SQLiteOpenHelper
 
         db.insert(TABLE_IMAGES, null, values);
 
-
         String query="SELECT MAX("+COLUMN_ID+") FROM "+TABLE_IMAGES+" ;";
         Cursor c=db.rawQuery(query,null);
         c.moveToFirst();
         int id=c.getInt(c.getColumnIndex("MAX("+COLUMN_ID+")"));
-
-        /////to be removed
-        query="SELECT * FROM "+TABLE_IMAGES+" WHERE "+COLUMN_ID+"="+id+" ;";
-        c=db.rawQuery(query,null);
-        c.moveToFirst();
-
-        Toast.makeText(context,"id="+String.valueOf(id)+" album id="+c.getString(c.getColumnIndex(COLUMN_ALBUM_ID)),Toast.LENGTH_LONG).show();
-        ////
-
         db.close();
         return id;
     }
@@ -94,7 +83,6 @@ public class ImageDB extends SQLiteOpenHelper
         Image image;
         SQLiteDatabase db=getWritableDatabase();
         String query = "SELECT * FROM " + TABLE_IMAGES + " WHERE " + COLUMN_ALBUM_ID + "=" + album.getId() + " ;";
-
 
             Cursor c = db.rawQuery(query, null);
             c.moveToFirst();
