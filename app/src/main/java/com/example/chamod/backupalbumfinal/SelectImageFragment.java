@@ -112,7 +112,8 @@ public class SelectImageFragment extends Fragment {
 
                     imageBitmap= null;
                     try {
-                        imageBitmap = Utility.decodeBitmap(imageUri, relatedActivity);
+                        imageBitmap = Utility.decodeBitmap(imageUri, relatedActivity,
+                                imageViewfrgmnt.getMaxHeight(),imageViewfrgmnt.getMaxWidth());
                     } catch (FileNotFoundException e) {
                         e.printStackTrace();
                     }

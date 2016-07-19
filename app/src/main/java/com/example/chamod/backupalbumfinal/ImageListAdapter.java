@@ -48,7 +48,8 @@ public class ImageListAdapter extends ArrayAdapter<Image> {
         txtImageDesc.setEnabled(false);
         //setting manual image should be done
         try {
-            imageViewAlbumImage.setImageBitmap(Utility.decodeBitmap(singleImage.getUri(), activity));
+            imageViewAlbumImage.setImageBitmap(Utility.decodeBitmap(singleImage.getUri(), activity,
+                    imageViewAlbumImage.getMaxHeight(),imageViewAlbumImage.getMaxWidth()));
         } catch (Exception e) {
             Toast.makeText(activity,"exception = "+e.toString(),Toast.LENGTH_LONG).show();
         }

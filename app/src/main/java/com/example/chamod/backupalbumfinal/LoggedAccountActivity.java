@@ -10,6 +10,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.ListView;
+import android.widget.Toast;
 
 import Handlers.AccountHandler;
 import Handlers.AlbumHandler;
@@ -98,13 +99,19 @@ public class LoggedAccountActivity extends ActionBarActivity {
 
     public void gotoAlbum(View view)
     {
-        final int position=listViewAlbums.getPositionForView((View)view.getParent());
-        OpenedAlbumHandler openedAlbumHandler=OpenedAlbumHandler.getInstance();
-        openedAlbumHandler.setOpenedAlbum(albumHandler.getAlbums().get(position));
+        try {
+            final int position = listViewAlbums.getPositionForView((View) view.getParent());
+            OpenedAlbumHandler openedAlbumHandler = OpenedAlbumHandler.getInstance();
+            openedAlbumHandler.setOpenedAlbum(albumHandler.getAlbums().get(position));
 
-        if(openedAlbumActivityIntent==null)
-            openedAlbumActivityIntent=new Intent(this,OpenedAlbumActivity.class);
-        startActivity(openedAlbumActivityIntent);
+            if (openedAlbumActivityIntent == null)
+                openedAlbumActivityIntent = new Intent(this, OpenedAlbumActivity.class);
+            startActivity(openedAlbumActivityIntent);
+        }
+        catch (Exception e)
+        {
+            Toast.makeText(this,"Error="+e.toString(),Toast.LENGTH_LONG).show();
+        }
     }
 
     public void logOut()

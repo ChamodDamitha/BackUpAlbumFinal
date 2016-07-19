@@ -24,28 +24,23 @@ public class Utility
     }
 
 
-    public static Bitmap decodeBitmap(Uri selectedImage,Activity activity) throws FileNotFoundException
+    public static Bitmap decodeBitmap(Uri selectedImage,Activity activity,int reqHeight,int reqWidth) throws FileNotFoundException
     {
-        BitmapFactory.Options o=new BitmapFactory.Options();
-        o.inJustDecodeBounds=true;
-        BitmapFactory.decodeStream(activity.getContentResolver().openInputStream(selectedImage),null,o);
-        final int REQUIRED_SIZE=3000;
+        BitmapFactory.Options options=new BitmapFactory.Options();
+        options.inJustDecodeBounds=true;                                                            //avoids memory allocation while decoding
+        BitmapFactory.decodeStream(activity.getContentResolver().openInputStream(selectedImage),null,options);
+        final int imageHeight=options.outHeight;
+        final int imageWidth=options.outWidth;
 
-        int width_tmp=o.outWidth,height_tmp=o.outHeight;
-
-        int scale=1;
-        while(true)
+        int inSampleSize=1;
+        while((imageHeight/inSampleSize)>reqHeight || (imageWidth/inSampleSize)>reqWidth)
         {
-            if(width_tmp/2<REQUIRED_SIZE || height_tmp/2<REQUIRED_SIZE)
-            {
-                break;
-            }
-            width_tmp/=2;
-            height_tmp/=2;
-            scale*=2;
+            inSampleSize*=2;
         }
-        BitmapFactory.Options o2=new BitmapFactory.Options();
-        o2.inSampleSize=scale;
-        return BitmapFactory.decodeStream(activity.getContentResolver().openInputStream(selectedImage),null,o2);
+
+        options.inSampleSize=inSampleSize;
+        options.inJustDecodeBounds=false;
+
+        return BitmapFactory.decodeStream(activity.getContentResolver().openInputStream(selectedImage),null,options);
     }
 }
