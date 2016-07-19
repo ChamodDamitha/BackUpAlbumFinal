@@ -18,7 +18,7 @@ import Model.Image;
 public class ImageDB extends SQLiteOpenHelper
 {
     private static final int DATABASE_VERSION=1;
-    private static final String DATABASE_NAME="BackUpAlbum2.db";
+    private static final String DATABASE_NAME="BackUpAlbum3.db";
     private static final String TABLE_IMAGES="images";
     private static final String COLUMN_ID="id";
     private static final String COLUMN_DESC="description";

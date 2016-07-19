@@ -14,7 +14,6 @@ import android.widget.Toast;
 import java.util.ArrayList;
 
 import Model.Image;
-import Support.Utility;
 
 /**
  * Created by Chamod on 7/13/2016.
@@ -48,11 +47,13 @@ public class ImageListAdapter extends ArrayAdapter<Image> {
         txtImageDesc.setEnabled(false);
         //setting manual image should be done
         try {
-            imageViewAlbumImage.setImageBitmap(Utility.decodeBitmap(singleImage.getUri(), activity,
-                    imageViewAlbumImage.getMaxHeight(),imageViewAlbumImage.getMaxWidth()));
+            new ViewImageListTask(imageViewAlbumImage, activity).execute(singleImage.getUri());
         } catch (Exception e) {
-            Toast.makeText(activity,"exception = "+e.toString(),Toast.LENGTH_LONG).show();
+            Toast.makeText(activity, "exception = " + e.toString(), Toast.LENGTH_LONG).show();
         }
+
+
+
         btnEditImgDesc.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
