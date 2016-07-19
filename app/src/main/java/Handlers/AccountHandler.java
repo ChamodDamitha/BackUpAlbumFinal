@@ -1,12 +1,15 @@
 package Handlers;
 
 import android.app.AlertDialog;
+import android.content.Intent;
 
+import com.example.chamod.backupalbumfinal.LoggedAccountActivity;
 import com.example.chamod.backupalbumfinal.MainLogin;
 import com.example.chamod.backupalbumfinal.NewAccountActivity;
 
 import Databases.AccountDB;
 import Model.User;
+import Support.Utility;
 
 
 /**
@@ -61,23 +64,20 @@ public class AccountHandler
 
     }
 
-    public boolean createAccount(String name,String email,String userName,String password,String confirmPassword)
+    public void createAccount(String name,String email,String userName,String password,String confirmPassword)
     {
         if(validate(name,email,userName,password,confirmPassword))
         {
             //save to db
             User user=new User(name,email,userName,password);
             user.setId(accountDB.addUser(user));
+            logOut();
             setLoggedUser(user);
 
-            AlertDialog.Builder builder = new AlertDialog.Builder(newAccountActivity);
-            builder.setMessage("New Account was created...!");
-            builder.setTitle("Alert");
-            builder.create();
-            builder.show();
-            return true;
+            Utility.showAlertOk(newAccountActivity,"Alert","New account was created...!");
+
+            newAccountActivity.startActivity(new Intent(newAccountActivity,LoggedAccountActivity.class));
         }
-        return false;
     }
 
     public boolean validate(String name,String email,String userName,String password,String confirmPassword)
@@ -107,13 +107,21 @@ public class AccountHandler
         return true;
     }
 
-    public boolean login(String username , String password)
+    public void login(String username , String password)
     {
-        User tempUser=accountDB.login(username,password);
-        if(tempUser==null) return false;
-        logOut();
-        setLoggedUser(tempUser);
-        return true;
+        boolean success=false;
+        if(username.length()!=0 && password.length()!=0) {
+            User tempUser=accountDB.login(username,password);
+            if(tempUser!=null) {
+                success=true;
+                logOut();
+                setLoggedUser(tempUser);
+                Intent newAccountIntent = new Intent(mainLogin, LoggedAccountActivity.class);
+                mainLogin.startActivity(newAccountIntent);
+            }
+        }
+        if(!success)Utility.showAlertOk(mainLogin,"Alert","Login Failed...!");
+
     }
 
     public  boolean logOut()

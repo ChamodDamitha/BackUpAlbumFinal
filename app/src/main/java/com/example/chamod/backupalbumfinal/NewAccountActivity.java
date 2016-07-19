@@ -1,8 +1,7 @@
 package com.example.chamod.backupalbumfinal;
 
-import android.content.Intent;
-import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
+import android.support.v7.app.ActionBarActivity;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -35,14 +34,9 @@ public class NewAccountActivity extends ActionBarActivity {
                 new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
-                        boolean isAccountCreated= accountHandler.createAccount(nameTxt.getText().toString(),emailTxt.getText().toString()
+                        accountHandler.createAccount(nameTxt.getText().toString(),emailTxt.getText().toString()
                                 ,usernameTxt.getText().toString(),passwordTxt.getText().toString()
                                 ,confrmPasswordTxt.getText().toString());
-                        if(isAccountCreated)
-                        {
-                            Intent newAccountIntent = new Intent(NewAccountActivity.this,LoggedAccountActivity.class);
-                            startActivity(newAccountIntent);
-                        }
                     }
                 }
         );
@@ -59,9 +53,6 @@ public class NewAccountActivity extends ActionBarActivity {
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
-            case R.id.action_logOut:
-                accountHandler.logOut();
-                startActivity(new Intent(this,MainLogin.class));
             default:
                 return super.onOptionsItemSelected(item);
         }

@@ -129,10 +129,19 @@ public class LoggedAccountActivity extends ActionBarActivity {
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         switch(item.getItemId()) {
-            case R.id.action_logOut :
+            case R.id.action_logOutLoggedAccount:
                 logOut();
+                return true;
+            case R.id.action_CreateAccountLoggedAccount:
+                startActivity(new Intent(this,NewAccountActivity.class));
+                return true;
             default:
                 return super.onOptionsItemSelected(item);
         }
+    }
+
+    @Override
+    public void onBackPressed() {
+        startActivity(new Intent(this,MainLogin.class));
     }
 }

@@ -1,9 +1,8 @@
 package com.example.chamod.backupalbumfinal;
 
-import android.app.AlertDialog;
 import android.content.Intent;
-import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
+import android.support.v7.app.ActionBarActivity;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -48,25 +47,7 @@ public class MainLogin extends ActionBarActivity {
                 new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
-
-                        boolean isLoginSuccess;
-                        if(txtUsername.getText().length()==0 || txtPassword.getText().length()==0)
-                            isLoginSuccess=false;
-                        else
-                            isLoginSuccess= accountHandler.login(txtUsername.getText().toString(),txtPassword.getText().toString());
-                        if(isLoginSuccess)
-                        {
-                            Intent newAccountIntent = new Intent(MainLogin.this,LoggedAccountActivity.class);
-                            startActivity(newAccountIntent);
-                        }
-                        else
-                        {
-                            AlertDialog.Builder builder = new AlertDialog.Builder(MainLogin.this);
-                            builder.setMessage("Login Failed...!");
-                            builder.setTitle("Alert");
-                            builder.create();
-                            builder.show();
-                        }
+                        accountHandler.login(txtUsername.getText().toString(),txtPassword.getText().toString());
                     }
                 }
         );
@@ -96,9 +77,6 @@ public class MainLogin extends ActionBarActivity {
         // automatically handle clicks on the Home/Up button, so long
         // as you specify a parent activity in AndroidManifest.xml.
         switch (item.getItemId()) {
-            case R.id.action_logOut:
-                accountHandler.logOut();
-                startActivity(new Intent(this,MainLogin.class));
             default:
                 return super.onOptionsItemSelected(item);
         }

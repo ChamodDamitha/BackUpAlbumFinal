@@ -5,9 +5,15 @@
     <item android:id="@+id/action_settings" android:title="@string/action_settings"
         android:orderInCategory="100" app:showAsAction="never" />
     <item
-        android:id="@+id/action_logOut"
+        android:id="@+id/action_CreateAccountOpenedAlbum"
+        android:title="Create Account"
+
+        />
+    <item
+        android:id="@+id/action_logOutOpenedAlbum"
         android:title="Log Out"
 
         />
+
 
 </menu>

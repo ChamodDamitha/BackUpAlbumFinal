@@ -58,8 +58,12 @@ public class OpenedAlbumActivity extends ActionBarActivity implements SelectImag
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         switch(item.getItemId()) {
-            case R.id.action_logOut :
+            case R.id.action_logOutOpenedAlbum :
                 logOut();
+                return true;
+            case R.id.action_CreateAccountOpenedAlbum:
+                startActivity(new Intent(this,NewAccountActivity.class));
+                return true;
             default:
                 return super.onOptionsItemSelected(item);
         }
@@ -75,8 +79,6 @@ public class OpenedAlbumActivity extends ActionBarActivity implements SelectImag
     {
         try {
             selectImageFragment.setVisibility(View.VISIBLE);
-
-
         }
         catch (Exception e)
         {

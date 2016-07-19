@@ -28,8 +28,6 @@ public class ViewImageListTask extends AsyncTask<Uri,Void,Bitmap>
         imageWidth=imageView.getMaxWidth();
     }
 
-
-
     @Override
     protected Bitmap doInBackground(Uri... params) {
             try {

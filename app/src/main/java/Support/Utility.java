@@ -1,16 +1,15 @@
 package Support;
 
 import android.app.Activity;
+import android.app.AlertDialog;
+import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.net.Uri;
 
-import com.example.chamod.backupalbumfinal.ImageViewUri;
-
 import java.io.FileNotFoundException;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
-import java.util.ArrayList;
 import java.util.Date;
 
 /**
@@ -19,7 +18,14 @@ import java.util.Date;
 public class Utility
 {
 
-
+    public static void showAlertOk(Context context,String title,String msg)
+    {
+        AlertDialog.Builder builder = new AlertDialog.Builder(context);
+        builder.setMessage(msg);
+        builder.setTitle(title);
+        builder.create();
+        builder.show();
+    }
 
     public static String getCurrentDate()
     {
