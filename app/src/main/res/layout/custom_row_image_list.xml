@@ -18,8 +18,13 @@
         android:minWidth="300dp"
         android:nestedScrollingEnabled="false" />
 
-    <TextView
+    <LinearLayout
         android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:id="@+id/Layout2">
+
+    <TextView
+        android:layout_width="wrap_content"
         android:layout_height="30dp"
         android:textAppearance="?android:attr/textAppearanceMedium"
         android:text="Date"
@@ -27,14 +32,25 @@
         android:gravity="center"
         android:layout_below= "@+id/imageViewAlbumImage"
         android:layout_margin="5dp"
+        android:layout_marginRight="0dp"
         />
 
+    <ImageView
+        android:layout_width="50dp"
+        android:layout_height="30dp"
+        android:id="@+id/imageViewBacked"
+        android:layout_below="@id/imageViewAlbumImage"
+        android:layout_toRightOf="@+id/txtImageDate"
+        android:layout_marginTop="5dp"
+        android:src="@drawable/right_icon" />
+    </LinearLayout>
     <EditText
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:id="@+id/txtImageDesc"
         android:layout_below="@+id/txtImageDate"
         />
+
 <LinearLayout
     android:layout_width="match_parent"
     android:layout_height="61dp"
@@ -48,7 +64,6 @@
         android:id="@+id/btnEditDesc"
         android:layout_below="@+id/txtImageDesc"
         android:layout_toLeftOf="@+id/btnSaveImgDesc"
-        android:layout_marginLeft="70dp"
         />
 
     <Button
@@ -70,6 +85,12 @@
         android:layout_toRightOf="@+id/btnSaveImgDesc"
         android:onClick="deleteImage"
         />
+
+    <Button
+        android:layout_width="80dp"
+        android:layout_height="wrap_content"
+        android:text="BACKUP"
+        android:id="@+id/btnBackUpImage" />
 
 </LinearLayout>
 

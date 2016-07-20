@@ -1,4 +1,4 @@
-package com.example.chamod.backupalbumfinal;
+package com.example.chamod.backupalbumfinal.Activities;
 
 import android.app.AlertDialog;
 import android.content.DialogInterface;
@@ -11,6 +11,9 @@ import android.view.View;
 import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.Toast;
+
+import com.example.chamod.backupalbumfinal.AlbumListAdapter;
+import com.example.chamod.backupalbumfinal.R;
 
 import Handlers.AccountHandler;
 import Handlers.AlbumHandler;
@@ -117,7 +120,7 @@ public class LoggedAccountActivity extends ActionBarActivity {
     public void logOut()
     {
         accountHandler.logOut();
-        startActivity(new Intent(this, MainLogin.class));
+        startActivity(new Intent(this, MainLoginActivity.class));
     }
 
     @Override
@@ -142,6 +145,6 @@ public class LoggedAccountActivity extends ActionBarActivity {
 
     @Override
     public void onBackPressed() {
-        startActivity(new Intent(this,MainLogin.class));
+        startActivity(new Intent(this,MainLoginActivity.class));
     }
 }

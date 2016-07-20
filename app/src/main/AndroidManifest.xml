@@ -2,17 +2,15 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.example.chamod.backupalbumfinal" >
 
-    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE"/>
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
 
     <application
         android:allowBackup="true"
         android:icon="@drawable/ic_launcher"
         android:label="BackUpAlbum"
         android:theme="@style/AppTheme" >
-
-
         <activity
-            android:name=".MainLogin"
+            android:name=".Activities.MainLoginActivity"
             android:label="Login" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -21,18 +19,21 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".NewAccountActivity"
+            android:name=".Activities.NewAccountActivity"
             android:label="New Account" >
         </activity>
         <activity
-            android:name=".LoggedAccountActivity"
+            android:name=".Activities.LoggedAccountActivity"
             android:label="Logged In" >
         </activity>
         <activity
-            android:name=".OpenedAlbumActivity"
+            android:name=".Activities.OpenedAlbumActivity"
             android:label="Album" >
         </activity>
-
+        <activity
+            android:name=".Activities.SettingsActivity"
+            android:label="@string/title_activity_settings" >
+        </activity>
     </application>
 
 </manifest>

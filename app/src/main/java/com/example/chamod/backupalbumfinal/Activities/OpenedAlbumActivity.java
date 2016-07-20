@@ -1,4 +1,4 @@
-package com.example.chamod.backupalbumfinal;
+package com.example.chamod.backupalbumfinal.Activities;
 
 import android.app.AlertDialog;
 import android.content.DialogInterface;
@@ -16,12 +16,16 @@ import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.chamod.backupalbumfinal.ImageListAdapter;
+import com.example.chamod.backupalbumfinal.R;
+import com.example.chamod.backupalbumfinal.SelectImageFragment;
+
 import Handlers.AccountHandler;
 import Handlers.OpenedAlbumHandler;
 import Model.Image;
 
 
-public class OpenedAlbumActivity extends ActionBarActivity implements SelectImageFragment.ISelectImage{
+public class OpenedAlbumActivity extends ActionBarActivity implements SelectImageFragment.ISelectImage {
 
     private OpenedAlbumHandler openedAlbumHandler;
     private ImageListAdapter imageListAdapter;
@@ -129,7 +133,7 @@ public class OpenedAlbumActivity extends ActionBarActivity implements SelectImag
     public void logOut()
     {
         AccountHandler.getInstance().logOut();
-        startActivity(new Intent(this, MainLogin.class));
+        startActivity(new Intent(this, MainLoginActivity.class));
     }
 
     @Override

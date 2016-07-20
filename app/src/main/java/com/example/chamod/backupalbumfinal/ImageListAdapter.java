@@ -45,14 +45,29 @@ public class ImageListAdapter extends ArrayAdapter<Image> {
 
         txtImageDesc.setText(singleImage.getDescription());
         txtImageDesc.setEnabled(false);
+
+        final ImageView imageViewBacked=(ImageView)customView.findViewById(R.id.imageViewBacked);
+        if(singleImage.isBacked())
+            imageViewBacked.setImageResource(R.drawable.right_icon);
+        else
+            imageViewBacked.setImageResource(R.drawable.wrong_icon);
+
+
+        Button btnBackUpImage=(Button)customView.findViewById(R.id.btnBackUpImage);
+        btnBackUpImage.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                //add functionality
+                imageViewBacked.setImageResource(R.drawable.right_icon);
+            }
+        });
+
         //setting manual image should be done
         try {
             new ViewImageListTask(imageViewAlbumImage, activity).execute(singleImage.getUri());
         } catch (Exception e) {
             Toast.makeText(activity, "exception = " + e.toString(), Toast.LENGTH_LONG).show();
         }
-
-
 
         btnEditImgDesc.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -64,10 +79,6 @@ public class ImageListAdapter extends ArrayAdapter<Image> {
             }
         });
 
-
-
         return customView;
-
-
     }
 }

@@ -1,4 +1,4 @@
-package com.example.chamod.backupalbumfinal;
+package com.example.chamod.backupalbumfinal.Activities;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -10,10 +10,12 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 
+import com.example.chamod.backupalbumfinal.R;
+
 import Handlers.AccountHandler;
 
 
-public class MainLogin extends ActionBarActivity {
+public class MainLoginActivity extends ActionBarActivity {
 
     private AccountHandler accountHandler;
     private TextView loggedUserTxt;
@@ -25,7 +27,7 @@ public class MainLogin extends ActionBarActivity {
         setContentView(R.layout.activity_main_login);
 
         accountHandler=AccountHandler.getInstance();
-        accountHandler.setMainLogin(this);
+        accountHandler.setMainLoginActivity(this);
 
 
         Button btnCreateAccount=(Button)findViewById(R.id.btnCreateAccount);
@@ -34,7 +36,7 @@ public class MainLogin extends ActionBarActivity {
                     @Override
                     public void onClick(View v) {
                         //switching activity //
-                        Intent newAccountIntent = new Intent(MainLogin.this,NewAccountActivity.class);
+                        Intent newAccountIntent = new Intent(MainLoginActivity.this,NewAccountActivity.class);
                         startActivity(newAccountIntent);
                     }
                 }
@@ -85,7 +87,7 @@ public class MainLogin extends ActionBarActivity {
 
     public void continueLogin(View view)
     {
-        Intent newAccountIntent = new Intent(MainLogin.this,LoggedAccountActivity.class);
+        Intent newAccountIntent = new Intent(MainLoginActivity.this,LoggedAccountActivity.class);
         startActivity(newAccountIntent);
     }
 }

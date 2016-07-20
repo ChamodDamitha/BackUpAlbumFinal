@@ -1,6 +1,6 @@
 package Handlers;
 
-import com.example.chamod.backupalbumfinal.LoggedAccountActivity;
+import com.example.chamod.backupalbumfinal.Activities.LoggedAccountActivity;
 
 import java.util.ArrayList;
 

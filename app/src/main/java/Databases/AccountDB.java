@@ -6,7 +6,7 @@ import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 
-import com.example.chamod.backupalbumfinal.MainLogin;
+import com.example.chamod.backupalbumfinal.Activities.MainLoginActivity;
 
 import Model.User;
 
@@ -33,14 +33,14 @@ public class AccountDB extends SQLiteOpenHelper
         return accountDB;
     }
 
-    MainLogin mainLogin;
+    MainLoginActivity mainLoginActivity;
 
     private AccountDB(Context context, String name, SQLiteDatabase.CursorFactory factory, int version) {
         super(context, DATABASE_NAME, factory, DATABASE_VERSION);
     }
 
-    public void setMainLogin(MainLogin mainLogin) {
-        this.mainLogin = mainLogin;
+    public void setMainLoginActivity(MainLoginActivity mainLoginActivity) {
+        this.mainLoginActivity = mainLoginActivity;
     }
 
 

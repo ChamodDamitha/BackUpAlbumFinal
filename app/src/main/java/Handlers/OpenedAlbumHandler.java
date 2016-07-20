@@ -2,7 +2,7 @@ package Handlers;
 
 import android.net.Uri;
 
-import com.example.chamod.backupalbumfinal.OpenedAlbumActivity;
+import com.example.chamod.backupalbumfinal.Activities.OpenedAlbumActivity;
 
 import java.util.ArrayList;
 

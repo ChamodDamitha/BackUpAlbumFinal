@@ -3,9 +3,9 @@ package Handlers;
 import android.app.AlertDialog;
 import android.content.Intent;
 
-import com.example.chamod.backupalbumfinal.LoggedAccountActivity;
-import com.example.chamod.backupalbumfinal.MainLogin;
-import com.example.chamod.backupalbumfinal.NewAccountActivity;
+import com.example.chamod.backupalbumfinal.Activities.LoggedAccountActivity;
+import com.example.chamod.backupalbumfinal.Activities.MainLoginActivity;
+import com.example.chamod.backupalbumfinal.Activities.NewAccountActivity;
 
 import Databases.AccountDB;
 import Model.User;
@@ -27,7 +27,7 @@ public class AccountHandler
     }
 
     private NewAccountActivity newAccountActivity;
-    private MainLogin mainLogin;
+    private MainLoginActivity mainLoginActivity;
 
     private AccountDB accountDB;
 
@@ -38,11 +38,11 @@ public class AccountHandler
 
     }
 
-    public void setMainLogin(MainLogin mainLogin) {
-        this.mainLogin = mainLogin;
+    public void setMainLoginActivity(MainLoginActivity mainLoginActivity) {
+        this.mainLoginActivity = mainLoginActivity;
 
-        accountDB=AccountDB.getInstance(mainLogin);
-        accountDB.setMainLogin(mainLogin);
+        accountDB=AccountDB.getInstance(mainLoginActivity);
+        accountDB.setMainLoginActivity(mainLoginActivity);
     }
 
     public void setNewAccountActivity(NewAccountActivity newAccountActivity) {
@@ -76,7 +76,7 @@ public class AccountHandler
 
             Utility.showAlertOk(newAccountActivity,"Alert","New account was created...!");
 
-            newAccountActivity.startActivity(new Intent(newAccountActivity,LoggedAccountActivity.class));
+            newAccountActivity.startActivity(new Intent(newAccountActivity, LoggedAccountActivity.class));
         }
     }
 
@@ -116,11 +116,11 @@ public class AccountHandler
                 success=true;
                 logOut();
                 setLoggedUser(tempUser);
-                Intent newAccountIntent = new Intent(mainLogin, LoggedAccountActivity.class);
-                mainLogin.startActivity(newAccountIntent);
+                Intent newAccountIntent = new Intent(mainLoginActivity, LoggedAccountActivity.class);
+                mainLoginActivity.startActivity(newAccountIntent);
             }
         }
-        if(!success)Utility.showAlertOk(mainLogin,"Alert","Login Failed...!");
+        if(!success)Utility.showAlertOk(mainLoginActivity,"Alert","Login Failed...!");
 
     }
 
